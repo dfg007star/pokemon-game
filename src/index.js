@@ -1,9 +1,7 @@
 import React from "react";
 import { render } from "react-dom";
+import "./index.css";
 
-render(
-  <div className="jumbotron text-center">
-    <h3>Pokemon-game</h3>
-  </div>,
-  document.getElementById("root")
-);
+import App from "./components/app";
+
+render(<App />, document.getElementById("root"));
