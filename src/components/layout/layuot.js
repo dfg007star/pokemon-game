@@ -5,7 +5,7 @@ const Layout = ({ id, title, desc, urlBg, colorBg }) => {
     <section
       className={l.root}
       id={id}
-      style={{ backgroundImage: `url(${urlBg})`, backgroundColor: colorBg }}
+      style={{ background: `url(${urlBg})`, backgroundColor: colorBg }}
     >
       <div className={l.wrapper}>
         <article>
@@ -13,7 +13,7 @@ const Layout = ({ id, title, desc, urlBg, colorBg }) => {
             <h3>{title}</h3>
             <span className={l.separator}></span>
           </div>
-          <div className={(l.desc, l.full)}>
+          <div className={`${l.desc} + ${l.full}`}>
             <p>{desc}</p>
           </div>
         </article>

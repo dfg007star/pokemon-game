@@ -13,9 +13,27 @@ const App = () => {
         title={"This is Pokemon Card Game"}
         descr={"Simple Triple Triad Card Game"}
       />
-      <Layout id={1} title={null} desc={null} urlBg={bg} colorBg={null} />
-      <Layout id={2} title={null} desc={null} urlBg={null} colorBg={"grey"} />
-      <Layout id={3} title={null} desc={null} urlBg={bg} colorBg={null} />
+      <Layout
+        id={1}
+        title={"Cool Pokemon"}
+        desc={"Really cool"}
+        urlBg={bg}
+        colorBg={null}
+      />
+      <Layout
+        id={2}
+        title={"Small Pokemon"}
+        desc={"Really small"}
+        urlBg={null}
+        colorBg={"grey"}
+      />
+      <Layout
+        id={3}
+        title={"Large Pokemon"}
+        desc={"Huge!"}
+        urlBg={bg}
+        colorBg={null}
+      />
       <Footer />
     </>
   );
