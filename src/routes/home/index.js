@@ -1,15 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Header from "../../components/header";
 import Layout from "../../components/layout";
-import Footer from "../../components/footer";
 import PokemonCard from "../../components/pokemon-card";
-import MenuHeader from "../../components/menu-header";
 
 import bg from "../../assets/bg3.jpg";
 import a from "./style.module.css";
 
-const POKEMONS = [
+export const POKEMONS = [
   {
     abilities: ["keen-eye", "tangled-feet", "big-pecks"],
     stats: {
@@ -133,13 +131,27 @@ const POKEMONS = [
 ];
 
 const HomePage = ({ onChangePage }) => {
+  const [pokemons, setPokemons] = useState(POKEMONS);
   const handleClickButton = (page) => {
     onChangePage && onChangePage(page);
   };
 
+  const onCardClick = (id) => {
+    setPokemons((pokemons) => {
+      const index = pokemons.findIndex((el) => el.id === id);
+      const oldItem = pokemons[index];
+      const newItem = { ...oldItem, isActive: !oldItem.isActive };
+      const newArray = [
+        ...pokemons.slice(0, index),
+        newItem,
+        ...pokemons.slice(index + 1),
+      ];
+      return newArray;
+    });
+  };
+
   return (
     <>
-      <MenuHeader />
       <Header
         title={"This is Pokemon Card Game"}
         descr={"Simple Triple Triad Card Game"}
@@ -164,7 +176,7 @@ const HomePage = ({ onChangePage }) => {
       </Layout>
       <Layout id={2} title={"Small Pokemon"} urlBg={null} colorBg={"grey"}>
         <div className={a.flex}>
-          {POKEMONS.map((item) => (
+          {pokemons.map((item) => (
             <PokemonCard
               key={item.id}
               name={item.name}
@@ -172,6 +184,8 @@ const HomePage = ({ onChangePage }) => {
               id={item.id}
               type={item.type}
               values={item.values}
+              onCardClick={onCardClick}
+              isActive={item.isActive}
             />
           ))}
         </div>
@@ -193,7 +207,6 @@ const HomePage = ({ onChangePage }) => {
           instead.{" "}
         </p>
       </Layout>
-      <Footer />
     </>
   );
 };
