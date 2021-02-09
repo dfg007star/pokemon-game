@@ -14,6 +14,7 @@ const Navbar = ({ onClickMenu, isActive, bgActive = false }) => {
         <a
           className={cn(s.menuButton, { [s.active]: isActive })}
           onClick={handleClick}
+          href="#"
         >
           <span />
         </a>

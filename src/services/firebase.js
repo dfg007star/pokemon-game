@@ -11,11 +11,37 @@ const firebaseConfig = {
   messagingSenderId: "293909259259",
   appId: "1:293909259259:web:8eff9a5a24e9dafdb3a15e",
 };
-
 firebase.initializeApp(firebaseConfig);
+class Firebase {
+  constructor() {
+    this.fire = firebase;
+    this.database = this.fire.database();
+  }
 
-export const fire = firebase;
+  getPokemonSoket = (cb) => {
+    this.database.ref("pokemons").on("value", (snapshot) => {
+      cb(snapshot.val());
+    });
+  };
 
-export const database = firebase.database();
+  getPokemonsOnce = async () => {
+    return await this.database
+      .ref("pokemons")
+      .once("value")
+      .then((snapshot) => snapshot.val());
+  };
 
-export default database;
+  updatePokemon = (key, pokemon) => {
+    this.database.ref("pokemon/${key}").set(pokemon);
+  };
+
+  addPokemon = (data, cb) => {
+    const newKey = this.database.ref().child("pokemons").push().key;
+    this.database
+      .ref("pokemons/" + newKey)
+      .set(data)
+      .then(() => cb());
+  };
+}
+
+export default Firebase;
